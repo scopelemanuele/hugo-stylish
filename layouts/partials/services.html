@@ -4,62 +4,31 @@
     <div class="container">
         <div class="row text-center">
             <div class="col-lg-10 col-lg-offset-1">
-                <h2>Our Services</h2>
+                <h2>{{ with .Site.Params.services.title }}{{ . }}{{ end }}</h2>
                 <hr class="small">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6">
-                        <div class="service-item">
-                            <span class="fa-stack fa-4x">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-cloud fa-stack-1x text-primary"></i>
-                        </span>
-                            <h4>
-                                <strong>Service Name</strong>
-                            </h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            <a href="#" class="btn btn-light">Learn More</a>
-                        </div>
+                {{ $list := . }}
+                {{ range $list.Site.Params.services.lines }}
+                ..
+                    <div class="row">
+                        {{ range $list.Site.Params.services.list }}
+                            <div class="col-md-{{ len $list.Site.Params.services.list | div 12 }} col-sm-6">
+                                <div class="service-item">
+                                    <span class="fa-stack fa-4x">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa {{ .icon }} fa-stack-1x text-primary"></i>
+                                </span>
+                                    <h4>
+                                        <strong>{{ .title }}</strong>
+                                    </h4>
+                                    <p>{{ .description | markdownify }}</p>
+                                    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#{{ .name }}">
+                                        {{ .button }}
+                                    </button>
+                                </div>
+                            </div>
+                        {{ end }}
                     </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="service-item">
-                            <span class="fa-stack fa-4x">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-compass fa-stack-1x text-primary"></i>
-                        </span>
-                            <h4>
-                                <strong>Service Name</strong>
-                            </h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            <a href="#" class="btn btn-light">Learn More</a>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="service-item">
-                            <span class="fa-stack fa-4x">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-flask fa-stack-1x text-primary"></i>
-                        </span>
-                            <h4>
-                                <strong>Service Name</strong>
-                            </h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            <a href="#" class="btn btn-light">Learn More</a>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="service-item">
-                            <span class="fa-stack fa-4x">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-shield fa-stack-1x text-primary"></i>
-                        </span>
-                            <h4>
-                                <strong>Service Name</strong>
-                            </h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            <a href="#" class="btn btn-light">Learn More</a>
-                        </div>
-                    </div>
-                </div>
+                {{ end }}
                 <!-- /.row (nested) -->
             </div>
             <!-- /.col-lg-10 -->
